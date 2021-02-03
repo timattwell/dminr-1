@@ -37,11 +37,11 @@ With just over **300k total tokens** in 21k sentences, CoNLL2003 is of a decent 
 For all data a tokenizer (splitting sequence into tokens), a part-of-speach tagger (semantic data for each token), and a chunker (not sure tbh) were applied to the raw data. The english form of the data was *NOT* lemmatized. Or at least the paper doesn't specify that it was, unlike the german data. The named entity tagging was done **by hand**, largely following MUC(?) conventions with an added ***MISC*** flag.
 
 ### Data Format
-*N.B - This is taken almost verbatim fromthe paper.*
+*N.B - This is taken almost verbatim fromthe paper.*  
 Basic formatting - one word per line, with empty lines representing sentence boundaries. Each line contains 4 fields: the word, its POS tag, its chunk tag, and its named entity tag. Words tagged with ***O*** are outside of named entities and the ***I-XXX*** tag is used for words inside a named entity of type ***XXX***. Whenever two entities of type ***XXX*** are immediately next to each other the first word of the second entity will be tagged ***B-XXX*** in order to show that it starts another entity. The data contains entities of four types: persons(***PER***), organisations(***ORG***), locations(***LOC***) and miscellaneous names(***MISC***). THis tagging scheme si the IOB scheme origuinally put forward by Ramshaw and MArcus (1995). We assume that named entities are non-recursive and non-overlapping. When a named entity is embedded in another enamed entity, usually only the top level entity has been annotated.
 
 ### Thoughts
-
+The CoNLL2003 datset is really fantastic dispite its age
 
 
 
