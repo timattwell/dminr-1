@@ -8,3 +8,4 @@ edition = "2018"
 
 [dependencies]
 vtext = "0.2.0"
+hashbrown = ""
