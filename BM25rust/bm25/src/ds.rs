@@ -1,7 +1,7 @@
 use hashbrown::HashMap;
 
 pub struct InvertedIndex {
-    index: HashMap<String, HashMap<u32, u32>>,
+    pub index: HashMap<String, HashMap<u32, u32>>,
 }
 
 impl InvertedIndex {
@@ -59,7 +59,7 @@ impl InvertedIndex {
 
 
 pub struct DocumentLengthTable {
-    table: HashMap<u32, u32>
+    pub table: HashMap<u32, u32>
 }
 
 impl DocumentLengthTable {
@@ -98,6 +98,7 @@ impl DocumentLengthTable {
 pub fn build_data_structures(corpus: Vec<Vec<&str>>) -> (InvertedIndex, DocumentLengthTable) {
     let mut idx = InvertedIndex::new();
     let mut dlt = DocumentLengthTable::new();
+
     for (docid, doc) in corpus.iter().enumerate() {
         for word in doc {
             idx.add(&word.to_string(), &(docid as u32));
