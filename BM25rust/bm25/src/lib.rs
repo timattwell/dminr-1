@@ -36,6 +36,7 @@ use ds::{ InvertedIndex , DocumentLengthTable };
 use std::collections::HashMap;
 use vtext::tokenize::*;
 use rayon::prelude::*;
+use std::time::Instant;
 
 // Import python wrapping
 use pyo3::prelude::*;
@@ -82,6 +83,7 @@ impl BM25 {
         // Extracts rust Vec<&str> from the input python list
         let corpus: Vec<&str> = corpus.extract()?; 
         // Making everything lowercase also converts &str -> String (might not be necessary)
+        
         let corpus: Vec<String> = corpus.par_iter()
             .map(|s| s.to_lowercase())
             .collect();
@@ -93,14 +95,9 @@ impl BM25 {
         // Initialise tokenizer and the output vec of vecs
         let tokenizer = RegexpTokenizer::default();
         // Loop through docs in corpus and tokenize each doc, &str -> Vec<&str>
-        let tokenized_corpus = corpus.par_iter()
+        let tokenized_corpus = corpus.iter()
             .map(|doc| tokenizer.tokenize(doc).collect())
             .collect();
-        /*
-        for doc in corpus {
-            //let tokens: Vec<&str> = tokenizer.tokenize(doc).collect();
-            tokenized_corpus.push(tokenizer.tokenize(doc).collect());
-        }*/
 
         // Initialise the data structs, filling them with the tokenized corpus
         let (idx, dlt) = ds::build_data_structures(tokenized_corpus);
@@ -127,7 +124,7 @@ impl BM25 {
     fn query(&self, query_set: &PyList) -> PyResult<Vec<HashMap<u32, f64>>> {
         let query_set: Vec<&str> = query_set.extract()?;
         Ok(
-            query_set.par_iter()
+            query_set.iter()
                 .map(|query| self.eval(query))
                 .collect()
         )
@@ -140,10 +137,14 @@ impl BM25 {
     fn av_query(&self, query_set: &PyList) -> PyResult<Vec<f64>> {
         let query_set: Vec<&str> = query_set.extract()?;
         Ok(
-            query_set.par_iter()
+            query_set.iter()
                 .map(|query| {
-                    self.eval(query).values().sum::<f64>() /
-                    (self.eval(query).values().len() as f64) 
+                    let x = self.eval(query).values().sum::<f64>() /
+                           (self.eval(query).values().len() as f64);
+                    match x.is_nan() {
+                        true => 0.0,
+                        _  => x,
+                    } 
                 })
                 .collect()
         )
@@ -167,8 +168,7 @@ impl BM25 {
      */
     fn eval(&self, query: &str) -> HashMap<u32, f64> {
         let mut query_result: HashMap<u32, f64> = HashMap::new();
-        let query = query.to_lowercase();
-        let tok_query: Vec<&str> = self.tok.tokenize(&*query).collect();
+        let tok_query: Vec<&str> = self.tok.tokenize(query).collect();
         let avdl = self.dlt.get_mean_len();
         let big_n = self.dlt.table.len() as f64;
         for term in tok_query {
