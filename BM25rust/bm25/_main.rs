@@ -1,3 +1,5 @@
+// old code, look into the ./src/* for new stuff
+
 mod bm25;
 use bm25::bum::BM25;
 
