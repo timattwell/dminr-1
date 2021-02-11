@@ -13,7 +13,6 @@ Realistically this wouldn't work, as the amount of data examples required to tra
     - Requires more example data to train the model
     - More difficult to build a balanced training dataset
     - Potentially less flexible as the model will not be as general
-###### Note. These are not referenced because they came from my own head. Will try to find references
 
 So we want a balance. A balance that gives us a range of catagories that divide up the potential entities in a way helpful for the application, without the negatives making *too much* of an impact on the implementation or usefulness of the information.  
 
