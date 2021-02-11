@@ -11,7 +11,7 @@ My initial thoughts on what factors into a good dataset are as follows:
 ## Datasets to Review (NER)
 - CoNLL 2003 NER 
 - WNUT 2017 Emerging Entities
-- OntoNotes 5.0
+- 
 
 ## CoNLL 2003 NER [https://arxiv.org/pdf/cs/0306050.pdf]
 The previous iteration of the entity connections program used CoNLL2003 as the training data. It's really the research standard when it comes to Named Entity Recognition (NER) tasks, with it being the defacto benchmark for any new model's performance in the area.  

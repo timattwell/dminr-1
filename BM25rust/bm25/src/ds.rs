@@ -1,5 +1,7 @@
 //use std::collections::HashMap;
 use hashbrown::HashMap;
+use std::sync::{ Arc, Mutex };
+use rayon::prelude::*;
 
 pub struct InvertedIndex {
     pub index: HashMap<String, HashMap<u32, u32>>,
