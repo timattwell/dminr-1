@@ -6,14 +6,14 @@ use bm25::bum::BM25;
 fn main() {
 
     let corpus = vec![
-        "Hello world. jo How are you's today? World. world world",
-        "My wife is Jo and you should say hello!"
+        "Hello world. george How are you's today? World. world world",
+        "I have a friend named george and you should say hello!"
     ];
 
     let bm25 = BM25::new(&corpus);
 
     let queries = vec![
-        "Jo Attwell super",
+        "george super",
         "Hello World"
     ];
     
