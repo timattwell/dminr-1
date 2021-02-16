@@ -68,12 +68,13 @@ This raises the question: Should punctuation be included in the returned entitie
 
 ## Tag Specifics
 What exactly will the tags be then? WNUT and OntoNotes use the full names for many of the categories (e.g. "B-Person", "I-Organisation"). CoNLL uses shortened tag names, which could make labelling slighly quicker if it has to be done manually. This will only work if the shortened names can be easily distinguised from each other. Thus, I propose the following (without the "B-" or "I-" prefix):
-- Person - PER
-- Organisation - ORG
-- Location - LOC
-- Product - PROD
-- Event - EVNT
-- Law - LAW
-- Misc - MISC  
+- Person - "PER"
+- Organisation - "ORG"
+- Location - "LOC"
+- Product - "PROD"
+- Event - "EVNT"
+- Law - "LAW"
+- Misc - "MISC"
+- Not an entity - "O"  
 
 I wanted to keep them all to three characters for conformity's sake, but the 4th character really clarifies the product, event and misc tags for an observer who has no prior knowledge of the tagging system, while still being fast to type!
