@@ -65,3 +65,15 @@ I believe that the WNUT convention is much more helpful and explicit when 'reatt
 In the standard CoNLL convention, if this short sequence were tagged like this, "Donald J" and "Trump" would be considered separate entities.
 
 This raises the question: Should punctuation be included in the returned entities? The other datasets have all included it. However, during testing of the intitial system, I found that names were being returned multiple times as separate entities based on the punctuation within them. Not only would the system return Donald Trump and Donald J Trump, but also Donald J . Trump. Removing at least one source of ambiguation could have the potential to clean the results up hugely. That said, certain punctionation marks can be key parts of names, which makes a decision more difficult.
+
+## Tag Specifics
+What exactly will the tags be then? WNUT and OntoNotes use the full names for many of the categories (e.g. "B-Person", "I-Organisation"). CoNLL uses shortened tag names, which could make labelling slighly quicker if it has to be done manually. This will only work if the shortened names can be easily distinguised from each other. Thus, I propose the following (without the "B-" or "I-" prefix):
+- Person - PER
+- Organisation - ORG
+- Location - LOC
+- Product - PROD
+- Event - EVNT
+- Law - LAW
+- Misc - MISC  
+
+I wanted to keep them all to three characters for conformity's sake, but the 4th character really clarifies the product, event and misc tags for an observer who has no prior knowledge of the tagging system, while still being fast to type!
