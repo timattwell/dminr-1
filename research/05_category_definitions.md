@@ -71,7 +71,7 @@ What exactly will the tags be then? WNUT and OntoNotes use the full names for ma
 - Person - "PER"
 - Organisation - "ORG"
 - Location - "LOC"
-- Product - "PROD"
+- Product - "PRD"
 - Event - "EVNT"
 - Law - "LAW"
 - Misc - "MISC"
