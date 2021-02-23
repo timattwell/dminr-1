@@ -19,7 +19,7 @@ The person catagory should contain the name of any person - whether real or fict
 The location catagory contains all named references to a place. This can include geopolitical entities, facilities. Similarly to the person tag, only explicit mentions should be included (this will be a common idea) - references to "there", for example, should not be included.
 
 ### Organisation:
-The organisation catagory should contain any named reference to an organisation. This could be a company, charity, football team, band, government. One of the potentially more ambiguous categories, particularly for edge cases. Once again, only explicitly named references should be included.
+The organisation catagory should contain any named reference to an organisation. This could be a company, charity, football team, band, government. One of the potentially more ambiguous categories, particularly for edge cases. Once again, only explicitly named references should be included. I would be interested to see what people think about this - should an unofficial group purely defined by a common political leaning, like "Brexiteers" or "Remainers", be included in this?
 
 ### *Product*:
 The new product catagory should include created work, tangible goods, or well defined services. Again, this needs to be carefully and thoughtfully defined to make edge cases easier to deal with. Only explicitly named references.
