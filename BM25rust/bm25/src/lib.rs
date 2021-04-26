@@ -64,6 +64,7 @@ struct BM25{
     b: f64,
     eps: f64,
     delt: f64,
+    n_docs: usize,
 }
 
 // Python facing methods in BM25 struct 
@@ -82,8 +83,10 @@ impl BM25 {
         let delt: f64 = delt.extract()?;
         // Extracts rust Vec<&str> from the input python list
         let corpus: Vec<&str> = corpus.extract()?; 
-        // Making everything lowercase also converts &str -> String (might not be necessary)
-        
+
+        let n_docs: usize = corpus.len();
+
+        // Making everything lowercase also converts &str -> String (might not be necessary)        
         let corpus: Vec<String> = corpus.par_iter()
             .map(|s| s.to_lowercase())
             .collect();
@@ -112,6 +115,7 @@ impl BM25 {
                 b: b,
                 eps: eps,
                 delt: delt,
+                n_docs: n_docs,
             }
         )
     }
@@ -140,7 +144,7 @@ impl BM25 {
             query_set.iter()
                 .map(|query| {
                     let x = self.eval(query).values().sum::<f64>() /
-                           (self.eval(query).values().len() as f64);
+                           (self.n_docs as f64);//self.eval(query).values().len() as f64);
                     match x.is_nan() {
                         true => 0.0,
                         _  => x,
@@ -168,6 +172,8 @@ impl BM25 {
      */
     fn eval(&self, query: &str) -> HashMap<u32, f64> {
         let mut query_result: HashMap<u32, f64> = HashMap::new();
+        let query: String = query.to_lowercase();
+        let query: &str = &*query;
         let tok_query: Vec<&str> = self.tok.tokenize(query).collect();
         let avdl = self.dlt.get_mean_len();
         let big_n = self.dlt.table.len() as f64;
